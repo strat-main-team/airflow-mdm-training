@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: mdm
+      POSTGRES_USER: mdm
+      POSTGRES_PASSWORD: mdm
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+
+  airflow:
+    build: ./airflow
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8080"
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://mdm:mdm@postgres:5432/mdm
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    command: webserver

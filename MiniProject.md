@@ -6,6 +6,138 @@ This is designed to be **portfolio‑ready** and representative of real‑world 
 
 ---
 
+### Prerequisites
+
+* Docker
+* Docker Compose
+* Ports available on your machine:
+
+  * Postgres: **5433** (host) → 5432 (container)
+  * Airflow UI: **8081** (host) → 8080 (container)
+
+---
+
+### Step 1: Stop any running containers
+
+```bash
+docker-compose down
+```
+
+---
+
+### Step 2: Start PostgreSQL only
+
+Airflow needs its metadata database available before initialization.
+
+```bash
+docker-compose up -d postgres
+```
+
+Verify Postgres is running:
+
+```bash
+docker ps
+```
+
+You should see the `postgres` container in a running state.
+
+---
+
+### Step 3: Initialize the Airflow metadata database
+
+Run the initialization command **inside the Airflow container** using Airflow **2.6.3**:
+
+```bash
+docker-compose run --rm airflow airflow db init
+```
+
+Expected output (example):
+
+```
+INFO  [airflow.db.init] Initializing metadata database
+INFO  [alembic.runtime.migration] Running upgrade
+INFO  [airflow.db.init] Initialized the metadata database
+```
+
+This step is required **only once** unless you wipe volumes.
+
+---
+
+### Step 4: Create an Airflow admin user
+
+Without this, you cannot log in to the Airflow UI.
+
+```bash
+docker-compose run --rm airflow airflow users create \
+  --username admin \
+  --password admin \
+  --firstname Admin \
+  --lastname User \
+  --role Admin \
+  --email admin@example.com
+```
+
+This step is also required **only once**.
+
+---
+
+### Step 5: Start Airflow services
+
+```bash
+docker-compose up
+```
+
+Wait ~30 seconds for the webserver to start.
+
+---
+
+### Step 6: Access the Airflow UI
+
+Open your browser:
+
+```
+http://localhost:8081
+```
+
+Login credentials:
+
+* **Username:** admin
+* **Password:** admin
+
+You should now see the DAG:
+
+```
+ecommerce_customer_mdm_pipeline
+```
+
+The DAG is paused by default — this is expected behavior.
+
+---
+
+### Step 7: Run the pipeline
+
+1. Unpause the DAG
+2. Trigger it manually or wait for the scheduled run
+
+Airflow will:
+
+* Read customer records from Postgres staging
+* Run Splink deduplication
+* Write master customer records back to Postgres
+
+---
+
+## 9. Troubleshooting
+
+### Port already allocated (5432 or 8080)
+
+* Postgres runs on **host port 5433**
+* Airflow UI runs on **host port 8081**
+
+Update `docker-compose.yml` if these ports are in use.
+
+---
+
 ## 1. Business Context
 
 E‑commerce platforms often store customers at the **order level**, resulting in:

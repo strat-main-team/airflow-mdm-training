@@ -6,6 +6,11 @@ This repository contains a 2-week intensive learning path and a hands-on mini-pr
 📌 Project Overview
 The "Golden Record" pipeline ingests messy customer data, standardizes it via PySpark, uses Splink for probabilistic record linkage, and orchestrates the entire flow using Apache Airflow.
 
+📌 Pre-requisites
+1. Docker Desktop
+2. Git hub account
+3. WSL 
+
 🗓️ 2-Week Learning Path
 
 Day 1-2: Docker-Airflow environment setup & volume persistence.

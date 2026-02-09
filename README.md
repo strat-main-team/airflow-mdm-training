@@ -7,46 +7,18 @@ This repository contains a 2-week intensive learning path and a hands-on mini-pr
 The "Golden Record" pipeline ingests messy customer data, standardizes it via PySpark, uses Splink for probabilistic record linkage, and orchestrates the entire flow using Apache Airflow.
 
 🗓️ 2-Week Learning Path
-Week 1: The Orchestration Layer
+
 Day 1-2: Docker-Airflow environment setup & volume persistence.
 
-Day 3: Airflow Fundamentals: DAGs, Operators (Python, Bash), and the Scheduler.
+Day 3-5: Airflow Fundamentals: DAGs, Operators (Python, Bash), and the Scheduler on  [Airflow 101 Learning Path - Astronomer Academy](https://academy.astronomer.io/path/airflow-101).
 
-Day 4: Data Engineering foundations: Standardizing strings and cleaning schemas with PySpark.
+Day 6-7: DAMA-DMBOK Data Quality Dimensions.
+Reading: [DAMA-DMBOK Summary](https://www.linkedin.com/pulse/dama-dmbok-data-management-body-knowledge-summary-sunil-zarikar-tygyf/)
 
-Day 5: Airflow Variables & Connections: Managing local file paths and database URIs.
-
-Reading: DAMA-DMBOK Data Quality Dimensions.
-
-Week 2: The MDM Intelligence
-Day 8-9: Introduction to Splink: Blocking rules and Fellegi-Sunter model basics.
-
+Day 8-9: [Introduction to Splink](https://moj-analytical-services.github.io/splink/demos/tutorials/00_Tutorial_Introduction.html)
 Day 10: Probabilistic Matching: Identifying "Jon Doe" vs "John Doe" using Levenshtein distance.
 
-Day 11: Survivorship Logic: Merging attributes to create the "Golden Record."
-
-Day 12-13: Data Quality Gates: Using Airflow Sensors to validate de-duplication rates.
-
-Day 14: Final Documentation: Exporting results and lineage mapping.
-
-🏗️ Mini-Project: Unified Customer View
-1. The Dataset
-Source: Kaggle - Customer Search Data (De-duping)
-
-Context: This dataset contains duplicate entries with typos in names, addresses, and emails—perfect for testing record linkage logic.
-
-Setup: Download the CSV, rename it to raw_customers.csv, and place it in the /data folder.
-
-2. Pipeline Architecture
-Extract: Airflow detects the file in the /data volume.
-
-Transform (Cleaning): PySpark converts all strings to lowercase, removes special characters, and formats phone numbers.
-
-Match (Splink): A probabilistic model assigns a unique_id to matching records across different systems.
-
-Survivorship: A "Golden Record" is created by taking the most recent or most complete data point for each cluster.
-
-Load: The final table is written to a local DuckDB file for analysis.
+Day 11-14: Mini Project 
 
 🛠️ Setup & Usage
 Prerequisites

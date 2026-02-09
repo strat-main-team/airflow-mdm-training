@@ -72,8 +72,8 @@ Jupyter Lab: http://localhost:8888 (For prototyping Splink models)
 
 
 📖 Key MDM References
-Splink Docs: Linkage Theory & Tutorials
+Splink Docs: [Linkage Theory & Tutorials](https://moj-analytical-services.github.io/splink/)
 
-Probabilistic Matching: Robin Linacre’s Introduction to Linkage
+Probabilistic Matching: [Robin Linacre’s Introduction to Linkage](https://www.robinlinacre.com/probabilistic_linkage/)
 
-Airflow Docs: Best Practices for DAGs
+Airflow Docs: [Best Practices for DAGs](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html)

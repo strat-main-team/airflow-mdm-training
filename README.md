@@ -24,6 +24,7 @@ Day 8-9: [Introduction to Splink](https://moj-analytical-services.github.io/spli
 Day 10: Probabilistic Matching: Identifying "Jon Doe" vs "John Doe" using Levenshtein distance.
 
 Day 11-14: Mini Project 
+https://github.com/strat-main-team/airflow-mdm-training/blob/main/MiniProject.md
 
 🛠️ Setup & Usage
 Prerequisites
